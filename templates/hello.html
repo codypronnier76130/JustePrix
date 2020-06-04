@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Juste Prix</title>
+</head>
+<body>
+        <h1>BIENVENUE AU JUSTE PRIX</h1>
+        <p>Voici notre produit préféré : {{NOM}} <img src="{{IMAGE}}"> </p>
+           
+
+{%if PRICE == PRIX %}
+    <p>VOUS AVEZ GAGNE <br>
+    {{TEMPSTOTAL.seconds}}
+    </p>
+
+    <form action="/" method="get">
+        <input type="submit" value="recommencer"/>
+    </form>
+{%else%}
+        <form action="/" method="post">
+            <p>Essaie de trouver le prix</p>
+            <input type="hidden" name="nombredebase" value="{{NOMBREDEBASE}}"/>
+            <input type="number" name="champprix" id="champprix"/>
+            <input type="hidden" name="historique" value="{{HISTORIQUE}}"/>
+            <input type="hidden" name="firsttrytime" value="{{FIRSTTRYTIME}}"/>
+            <input type="submit" id="envoyer"/>
+            
+        </form> 
+    {%if PRICE != -1 %}
+
+        {%if PRICE > PRIX%}
+            <p>Le prix est trop grand</p>
+        {%else%}
+            <p>Le prix est trop petit</p>
+    
+        {%endif%}
+    {%endif%}
+{%endif%}
+
+{%if PRICE != -1 %}
+<h2>Précédentes tentatives:</h2>
+<ul>
+    {%for currentvalue in HISTORIQUE %}
+        <li>{{currentvalue}}</li>
+    {%endfor%}
+</ul>
+{%endif%}           
+
+</body>
+</html>
+
+
